@@ -1,9 +1,10 @@
 // Import required modules
-const express = require('express');
-const dotenv = require('dotenv');
-const { connectDB } = require('../config/database');
-const userRoutes = require('./routes/userRoutes');
-const errorHandler = require('./middlewares/errorMiddleware');
+const express = require("express");
+const dotenv = require("dotenv");
+const { connectDB } = require("../config/database");
+const userRoutes = require("./routes/userRoutes");
+const userEnrollRoutes = require("./routes/userEnrollmentRoute");
+const errorHandler = require("./middlewares/errorMiddleware");
 
 // Load environment variables
 dotenv.config();
@@ -18,7 +19,8 @@ const app = express();
 app.use(express.json());
 
 // Define routes
-app.use('/api/user', userRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/course", userEnrollRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

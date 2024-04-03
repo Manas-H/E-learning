@@ -12,6 +12,9 @@ const {
 const {
   getCoursesList,
   createCourse,
+  getCourse,
+  removeCourse,
+  updateCourseDetails,
 } = require("../controllers/courseController");
 const {
   authenticateToken,
@@ -34,6 +37,10 @@ router.put(
   upload.single("profilePicture"),
   updateProfile
 );
+
+// Get Courses route - protected by authentication middleware
+router.get("/courses", authenticateToken, getCoursesList);
+
 router.post(
   "/courses",
   authenticateToken,
@@ -41,7 +48,28 @@ router.post(
   createCourse
 );
 
-// Get Courses route - protected by authentication middleware
-router.get("/courses", authenticateToken, getCoursesList);
+// Route to get a course by ID
+router.get(
+  "/courses/:id",
+  authenticateToken,
+  isSuperAdminMiddleware,
+  getCourse
+);
+
+// Route to update course details by ID
+router.put(
+  "/courses/:id",
+  authenticateToken,
+  isSuperAdminMiddleware,
+  updateCourseDetails
+);
+
+// Route to delete a course by ID
+router.delete(
+  "/courses/:id",
+  authenticateToken,
+  isSuperAdminMiddleware,
+  removeCourse
+);
 
 module.exports = router;

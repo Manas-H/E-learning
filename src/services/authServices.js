@@ -2,10 +2,14 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
-const generateAuthToken = (userId) => {
-  const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+const generateAuthToken = (userId, issuperadmin) => {
+  const token = jwt.sign(
+    { id: userId, issuperadmin: issuperadmin },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
   return token;
 };
 
@@ -21,7 +25,7 @@ const loginUser = async ({ email, password }) => {
       throw new Error("Invalid credentials");
     }
 
-    const token = generateAuthToken(user.id);
+    const token = generateAuthToken(user.id, user.issuperadmin);
     return token;
   } catch (error) {
     throw new Error(error.message);

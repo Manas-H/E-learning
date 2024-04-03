@@ -66,7 +66,7 @@ const updateProfile = async (req, res) => {
       const imagePath = req.file.path;
       // console.log("this is img path :", imagePath);
       const result = await uploadProfilePicture(imagePath);
-      // console.log("this is results :", result);
+      // console.log("this is results :", result);   
       profilePicture = result;
       // console.log("this is profilePic :", profilePicture);
     }

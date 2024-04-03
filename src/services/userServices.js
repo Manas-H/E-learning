@@ -6,6 +6,8 @@ const bcrypt = require("bcrypt");
 const { PostgresError } = require("postgres");
 const { sql } = require("../../config/database");
 const { uploadProfilePicture } = require("../services/cloudinaryServices");
+// const config = require('../../config/config');
+// const { sendEmail } = require('../../config/email');
 
 const registerUser = async ({ name, email, password, profilePicture }) => {
   try {
