@@ -7,6 +7,8 @@ const {
   viewProfile,
   updateProfile,
   login,
+  removeUser,
+  updatePassword,
   upload,
 } = require("../controllers/userController");
 const {
@@ -37,6 +39,10 @@ router.put(
   upload.single("profilePicture"),
   updateProfile
 );
+
+router.put("/update-password", authenticateToken, updatePassword);
+
+router.delete("/:id", authenticateToken, isSuperAdminMiddleware, removeUser);
 
 // Get Courses route - protected by authentication middleware
 router.get("/courses", authenticateToken, getCoursesList);

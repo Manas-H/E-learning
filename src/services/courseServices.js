@@ -40,58 +40,6 @@ const getCourseById = async (id) => {
     throw new Error(error.message);
   }
 };
-//   try {
-//     const course = await Course.findById(id);
-//     if (!course) {
-//       throw new Error("Course not found");
-//     }
-//     // Update course properties
-//     course.title = title;
-//     course.category = category;
-//     course.level = level;
-//     course.popularity = popularity;
-//     await course.save();
-//     return course;
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// };
-
-// const updateCourse = async (courseId, updatedCourseInfo) => {
-//   try {
-//     const { title, category, level, popularity } = updatedCourseInfo;
-
-//     console.log("Updated Info:", updatedCourseInfo); // Log the updated info
-
-//     if (title) {
-//       await sql`UPDATE courses SET title = ${title} WHERE id = ${courseId}`;
-//     }
-//     if (category) {
-//       await sql`UPDATE courses SET category = ${category} WHERE id = ${courseId}`;
-//     }
-//     if (level) {
-//       await sql`UPDATE courses SET level = ${level} WHERE id = ${courseId}`;
-//     }
-//     if (popularity) {
-//       await sql`UPDATE courses SET popularity = ${popularity} WHERE id = ${courseId}`;
-//     }
-
-//     const result = await sql`SELECT * FROM courses WHERE id = ${courseId}`;
-
-//     // Check if any rows were affected
-//     if (result.length === 0) {
-//       throw new Error("Course not found");
-//     }
-
-//     console.log("Updated Course:", result[0]); // Log the updated course
-
-//     // Return the updated course information
-//     return result[0];
-//   } catch (error) {
-//     console.error("Error:", error.message); // Log any errors
-//     throw new Error(error.message);
-//   }
-// };
 
 const updateCourse = async (courseId, updatedCourseInfo) => {
   try {

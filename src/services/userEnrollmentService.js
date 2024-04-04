@@ -1,4 +1,5 @@
 const { sql } = require("../../config/database");
+const { sendEmail } = require("../../config/email");
 
 const enrollUserInCourse = async (userId, courseId) => {
   try {
@@ -12,13 +13,35 @@ const enrollUserInCourse = async (userId, courseId) => {
         success: false,
         message: "User is already enrolled in this course",
       };
-    //   throw new Error("User is already enrolled in this course");
+      //   throw new Error("User is already enrolled in this course");
     }
 
     // Insert the new enrollment record
     await sql`
         INSERT INTO user_courses (user_id, course_id) VALUES (${userId}, ${courseId})
       `;
+
+    // Retrieve user and course details
+    const [course] = await Promise.all([
+      // sql`SELECT * FROM users WHERE id = ${userId}`,
+      sql`SELECT * FROM courses WHERE id = ${courseId}`,
+    ]);
+
+    // Extract necessary details
+    // const userEmail = user[0].email;
+    const courseName = course[0].title;
+    // console.log(courseName);
+
+    // Send email notification
+    await sendEmail(
+      "Course Enrollment Confirmation",
+      `Hello,\n\nYou have successfully enrolled in the course "${courseName}".\n\nThank you.`
+    );
+
+    return {
+      success: true,
+      message: "User enrolled in the course successfully",
+    };
   } catch (error) {
     console.log(error);
     throw new Error("Error enrolling user in course");

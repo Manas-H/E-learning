@@ -4,7 +4,7 @@ const {
 } = require("../services/userEnrollmentService");
 
 const enrollUserInCourseController = async (req, res) => {
-  const userId = req.user.id; // Extract user ID from the request object
+  const userId = req.user.id;
 
   const { courseId } = req.body;
 
@@ -24,7 +24,7 @@ const enrollUserInCourseController = async (req, res) => {
 };
 
 const getEnrolledCoursesController = async (req, res) => {
-  const userId = req.user.id; // Extract user ID from the request object
+  const userId = req.user.id;
 
   try {
     const enrolledCourses = await getEnrolledCourses(userId);

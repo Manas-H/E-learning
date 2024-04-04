@@ -3,6 +3,7 @@
 const postgres = require("postgres");
 require("dotenv").config();
 
+// all the api and other credentials are stored in env file
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 
 const sql = postgres({
@@ -17,6 +18,7 @@ const sql = postgres({
   },
 });
 
+// Db connection
 const connectDB = async () => {
   try {
     // Test the connection by querying the version of PostgreSQL
@@ -24,7 +26,7 @@ const connectDB = async () => {
     console.log("Connected to PostgreSQL database:", result);
   } catch (error) {
     console.error("Failed to connect to PostgreSQL database:", error);
-    process.exit(1); // Exit the application if unable to connect to the database
+    process.exit(1);
   }
 };
 

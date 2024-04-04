@@ -17,12 +17,12 @@ const loginUser = async ({ email, password }) => {
   try {
     const user = await User.findOneByEmail(email);
     if (!user) {
-      throw new Error("Invalid credentials");
+      throw new Error("Invalid credentials! Username or Email is Incorrect");
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      throw new Error("Invalid credentials");
+      throw new Error("Invalid credentials! Password is incorrect");
     }
 
     const token = generateAuthToken(user.id, user.issuperadmin);

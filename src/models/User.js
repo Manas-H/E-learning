@@ -1,6 +1,5 @@
 // models/User.js
 
-// Import the configured sql instance
 const { sql } = require("../../config/database");
 
 class User {
@@ -44,7 +43,7 @@ class User {
       const result = await sql`
         SELECT * FROM users WHERE email = ${email}
       `;
-      return result[0]; // Assuming email is unique, return the first user found
+      return result[0];
     } catch (error) {
       throw new Error("Error finding user by email");
     }
@@ -55,7 +54,7 @@ class User {
       const result = await sql`
         SELECT * FROM users WHERE id = ${userId}
       `;
-      return result[0]; // Assuming user ID is unique, return the first user found
+      return result[0];
     } catch (error) {
       throw new Error("Error finding user by ID");
     }

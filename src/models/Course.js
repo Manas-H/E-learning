@@ -119,36 +119,6 @@ class Course {
       throw new Error("Error deleting course from the database");
     }
   }
-
-  static async findAll1(sql, { limit = 10, offset = 0, category, level }) {
-    // <-- Pass 'sql' instance to 'findAll' method
-    let query = sql`
-      SELECT * FROM courses
-      ORDER BY popularity DESC
-      LIMIT ${limit} OFFSET ${offset}
-    `;
-
-    if (category) {
-      query = sql`
-        SELECT * FROM courses
-        WHERE category = ${category}
-        ORDER BY popularity DESC
-        LIMIT ${limit} OFFSET ${offset}
-      `;
-    }
-
-    if (level) {
-      query = sql`
-        SELECT * FROM courses
-        WHERE level = ${level}
-        ORDER BY popularity DESC
-        LIMIT ${limit} OFFSET ${offset}
-      `;
-    }
-
-    const courses = await query;
-    return courses;
-  }
 }
 
 module.exports = Course;

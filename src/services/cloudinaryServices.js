@@ -21,7 +21,7 @@ const uploadProfilePicture = async (filePath) => {
       folder: "public",
     });
 
-    // console.log("Uploaded image result: ", result);  
+    // console.log("Uploaded image result: ", result);
 
     return result.secure_url;
   } catch (error) {
